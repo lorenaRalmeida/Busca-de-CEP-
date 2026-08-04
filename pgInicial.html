@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de CEP e endereço</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Consulta de CEP e Endereço</h1> 
+        <section class="card">
+            <h2>Pesquisar por CEP</h2>
+            <input type="text"
+            id="cep"
+            placeholder="Digite o CEP"
+            maxlength="8">
+            <button id="buscarCEP">
+                Buscar Endereço
+            </button>
+            <div id="resultadoCep"
+            class="resultado">
+        </div>
+        </section>
+    <section class="card">
+
+        <h2>Pesquisar por Endereço</h2>
+
+        <select id="uf">
+
+            <option value="">Selecione o Estado</option>
+
+            <option>AC</option>
+            <option>AL</option>
+            <option>AP</option>
+            <option>AM</option>
+            <option>BA</option>
+            <option>CE</option>
+            <option>DF</option>
+            <option>ES</option>
+            <option>GO</option>
+            <option>MA</option>
+            <option>MT</option>
+            <option>MS</option>
+            <option>MG</option>
+            <option>PA</option>
+            <option>PB</option>
+            <option>PR</option>
+            <option>PE</option>
+            <option>PI</option>
+            <option>RJ</option>
+            <option>RN</option>
+            <option>RS</option>
+            <option>RO</option>
+            <option>RR</option>
+            <option>SC</option>
+            <option>SP</option>
+            <option>SE</option>
+            <option>TO</option>
+
+        </select>
+
+        <input
+            type="text"
+            id="cidade"
+            placeholder="Cidade"
+        >
+
+        <input
+            type="text"
+            id="logradouro"
+            placeholder="Logradouro"
+        >
+
+        <button id="buscarEndereco">
+            Buscar CEP
+        </button>
+
+        <div id="resultadoEndereco" class="resultado">
+
+        </div>
+
+    </section>
+
+    <section class="card">
+
+        <h2>Histórico de Pesquisas</h2>
+
+        <ul id="historico">
+
+        </ul>
+
+    </section>
+
+    <div class="botoes">
+
+        <button id="limpar">
+            Limpar
+        </button>
+
+    </div>
+
+</div>
+
+<script src="javaScript.js"></script>
+
+</body>
+</html>
+  
