@@ -1,9 +1,9 @@
 // URL da API
-const url = 'https://viacep.com.br/ws/$/json/';
-
 // Função para buscar e exibir os posts
-async function fetchPosts() {
-    const container = document.getElementById('posts-container');
+async function buscarEndereco() {
+    let cep = document.getElementById('cep').value;
+    let url = `https://viacep.com.br/ws/${cep}/json/`;
+    const container = document.getElementById('resultadoCep');
 
     try {
         // 1. Faz a requisição à API
@@ -15,13 +15,13 @@ async function fetchPosts() {
         }
 
         // 3. Converte os dados para formato JSON
-        const posts = await response.json();
+        const endereco = await response.json();
 
-        // 4. Limpa o container e renderiza os posts
+        // 4. Limpa o container e renderiza a tela
         container.innerHTML = ''; // Remove o "Carregando..."
-
+-------------------------------------------------------------------------------
         // Vamos exibir apenas os 10 primeiros posts para o exemplo
-        posts.slice(0, 10).forEach(post => {
+        forEach();
             const postElement = document.createElement('div');
             postElement.classList.add('post');
 
@@ -31,7 +31,6 @@ async function fetchPosts() {
             `;
 
             container.appendChild(postElement);
-        });
 
     } catch (error) {
         console.error('Erro ao buscar posts:', error);
