@@ -19,19 +19,8 @@ async function buscarEndereco() {
 
         // 4. Limpa o container e renderiza a tela
         container.innerHTML = ''; // Remove o "Carregando..."
--------------------------------------------------------------------------------
         // Vamos exibir apenas os 10 primeiros posts para o exemplo
-        forEach();
-            const postElement = document.createElement('div');
-            postElement.classList.add('post');
-
-            postElement.innerHTML = `
-                <h2>${post.title}</h2>
-                <p>${post.body}</p>
-            `;
-
-            container.appendChild(postElement);
-
+        console.log(endereco);
     } catch (error) {
         console.error('Erro ao buscar posts:', error);
         container.innerHTML = '<p style="color: red;">Erro ao carregar os posts.</p>';
@@ -39,4 +28,3 @@ async function buscarEndereco() {
 }
 
 // Chama a função ao carregar a página
-fetchPosts();
