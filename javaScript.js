@@ -1,30 +1,233 @@
-// URL da API
-// Função para buscar e exibir os posts
 async function buscarEndereco() {
-    let cep = document.getElementById('cep').value;
+
+    let cep = document.getElementById("cep").value;
+
+    // Remove caracteres que não sejam números
+    cep = cep.replace(/\D/g, "");
+
+    // Validação do CEP
+    if (cep.length !== 8) {
+        document.getElementById("resultadoCep").textContent =
+            "Digite um CEP válido com 8 números.";
+        return;
+    }
+
     let url = `https://viacep.com.br/ws/${cep}/json/`;
-    const container = document.getElementById('resultadoCep');
 
     try {
-        // 1. Faz a requisição à API
+
         const response = await fetch(url);
-        
-        // 2. Verifica se a resposta foi bem-sucedida
+
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status}`);
         }
 
-        // 3. Converte os dados para formato JSON
         const endereco = await response.json();
 
-        // 4. Limpa o container e renderiza a tela
-        container.innerHTML = ''; // Remove o "Carregando..."
-        // Vamos exibir apenas os 10 primeiros posts para o exemplo
-        console.log(endereco);
+        // Verifica se o CEP não foi encontrado
+        if (endereco.erro) {
+            document.getElementById("resultadoCep").textContent =
+                "CEP não encontrado.";
+            return;
+        }
+
+        const resultado = document.getElementById("resultadoCep");
+
+        resultado.innerHTML = "";
+
+        let logradouro = document.createElement("p");
+        logradouro.textContent = `Logradouro: ${endereco.logradouro}`;
+
+        let bairro = document.createElement("p");
+        bairro.textContent = `Bairro: ${endereco.bairro}`;
+
+        let cidade = document.createElement("p");
+        cidade.textContent = `Cidade: ${endereco.localidade}`;
+
+        let estado = document.createElement("p");
+        estado.textContent = `Estado: ${endereco.estado}`;
+
+        resultado.appendChild(logradouro);
+        resultado.appendChild(bairro);
+        resultado.appendChild(cidade);
+        resultado.appendChild(estado);
+
+        // Salva no histórico
+        salvarHistorico(cep);
+
+        // Atualiza o histórico na tela
+        mostrarHistorico();
+
     } catch (error) {
-        console.error('Erro ao buscar posts:', error);
-        container.innerHTML = '<p style="color: red;">Erro ao carregar os posts.</p>';
+
+        console.error(error);
+
+        document.getElementById("resultadoCep").textContent =
+            "Erro ao buscar o CEP.";
     }
 }
 
-// Chama a função ao carregar a página
+async function buscarCep() {
+
+    let uf = document.getElementById("uf").value;
+    let cidade = document.getElementById("cidade").value;
+    let logradouro = document.getElementById("logradouro").value;
+
+    // Validação para garantir que todos os campos estajam preenchidos
+    if (uf === "" || cidade === "" || logradouro === "") {
+
+        document.getElementById("resultadoEndereco").textContent =
+            "Preencha todos os campos.";
+
+        return;
+    }
+
+    let url = `https://viacep.com.br/ws/${uf}/${encodeURIComponent(cidade)}/${encodeURIComponent(logradouro)}/json/`;
+
+    try {
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+        }
+
+        const enderecos = await response.json();
+
+        const resultado = document.getElementById("resultadoEndereco");
+
+        resultado.innerHTML = "";
+
+        // Verifica se nenhum endereço foi encontrado
+        if (enderecos.length === 0) {
+
+            resultado.textContent =
+                "Nenhum endereço encontrado.";
+
+            return;
+        }
+
+        // Percorre todos os resultados
+        enderecos.forEach(endereco => {
+
+            let card = document.createElement("div");
+
+            let cep = document.createElement("p");
+            cep.textContent = `CEP: ${endereco.cep}`;
+
+            let logradouroResultado = document.createElement("p");
+            logradouroResultado.textContent =
+                `Logradouro: ${endereco.logradouro}`;
+
+            let bairro = document.createElement("p");
+            bairro.textContent =
+                `Bairro: ${endereco.bairro}`;
+
+            let cidadeResultado = document.createElement("p");
+            cidadeResultado.textContent =
+                `Cidade: ${endereco.localidade}`;
+
+            let estado = document.createElement("p");
+            estado.textContent =
+                `Estado: ${endereco.estado}`;
+
+            card.appendChild(cep);
+            card.appendChild(logradouroResultado);
+            card.appendChild(bairro);
+            card.appendChild(cidadeResultado);
+            card.appendChild(estado);
+
+            resultado.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("resultadoEndereco").textContent =
+            "Erro ao buscar o endereço.";
+    }
+}
+
+// Histórico
+function salvarHistorico(cep) {
+
+    let historico = JSON.parse(
+        localStorage.getItem("historicoCEP")
+    ) || [];
+
+    // Evita salvar o mesmo CEP várias vezes
+    if (!historico.includes(cep)) {
+
+        historico.push(cep);
+
+        localStorage.setItem(
+            "historicoCEP",
+            JSON.stringify(historico)
+        );
+    }
+}
+
+function mostrarHistorico() {
+
+    const lista = document.getElementById("historico");
+
+    lista.innerHTML = "";
+
+    let historico = JSON.parse(
+        localStorage.getItem("historicoCEP")
+    ) || [];
+
+    historico.forEach(cep => {
+
+        let item = document.createElement("li");
+
+        let botao = document.createElement("button");
+
+        botao.textContent = cep;
+
+        botao.addEventListener("click", function () {
+
+            document.getElementById("cep").value = cep;
+
+            buscarEndereco();
+
+        });
+
+        item.appendChild(botao);
+
+        lista.appendChild(item);
+
+    });
+}
+
+
+// ==============================
+// BOTÃO LIMPAR
+// ==============================
+
+document.getElementById("limpar").addEventListener("click", function () {
+
+    // Limpa os campos
+    document.getElementById("cep").value = "";
+    document.getElementById("uf").value = "";
+    document.getElementById("cidade").value = "";
+    document.getElementById("logradouro").value = "";
+
+    // Limpa os resultados
+    document.getElementById("resultadoCep").innerHTML = "";
+    document.getElementById("resultadoEndereco").innerHTML = "";
+
+});
+
+
+// ==============================
+// BOTÃO BUSCAR CEP POR ENDEREÇO
+// ==============================
+
+document
+    .getElementById("buscarEndereco")
+    .addEventListener("click", buscarCep);
+
+mostrarHistorico();
