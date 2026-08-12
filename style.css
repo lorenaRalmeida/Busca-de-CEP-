@@ -1,1 +1,161 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  }
 
+body {
+font-family: Arial, Helvetica, sans-serif;
+background: #f7f9fc;
+color: #222;
+padding: 20px;
+}
+
+.container {
+max-width: 920px;
+margin: 0 auto;
+background: #fff;
+padding: 16px;
+border-radius: 8px;
+border: 1px solid #e6eef9;
+}
+
+h1 {
+font-size: 1.6rem;
+font-family:'Courier New', Courier, monospace;
+color: #0b3d91;
+text-align: center;
+margin-bottom: 12px;
+}
+
+.card {
+background: #d3e3ff;
+border: 1px solid #e6eef9;
+padding: 12px;
+border-radius: 6px;
+margin-bottom: 12px;
+}
+
+.card h2 {
+font-size: 1rem;
+font-family:'Courier New', Courier, monospace;
+color: #0b3d91;
+margin-bottom: 8px;
+}
+
+input[type="text"],
+select {
+width: 100%;
+padding: 10px;
+margin-bottom: 8px;
+border: 1px solid #cfe0ff;
+border-radius: 6px;
+background: #fff;
+font-size: 0.95rem;
+color:#222222b2;
+}
+
+button {
+background: #083162;
+color: #fff;
+border: none;
+padding: 10px 12px;
+border-radius: 6px;
+cursor: pointer;
+font-weight: 600;
+font-family:'Courier New', Courier, monospace;
+}
+
+#limpar {
+background: #f1f5f9;
+color: #0b3d91;
+border: 1px solid #dbeafe;
+}
+
+.botoes {
+display: flex;
+justify-content: flex-end;
+gap: 8px;
+margin-top: 8px;
+}
+
+.resultado {
+background: #f1f6ff;
+border: 1px dashed #d6e9ff;
+padding: 10px;
+border-radius: 6px;
+min-height: 40px;
+margin-top: 6px;
+}
+
+.resultado p {
+margin: 6px 0;
+font-size: 0.95rem;
+}
+
+.resultado .item {
+padding: 8px;
+border-radius: 6px;
+background: #fff;
+border: 1px solid #e8f2ff;
+margin-bottom: 8px;
+}
+
+#historico {
+list-style: none;
+margin-top: 8px;
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+#historico li {
+padding: 8px;
+background: #fff;
+border: 1px solid #e6eef9;
+border-radius: 6px;
+cursor: pointer;
+}
+
+#historico li:hover {
+background: #f1f8ff;
+}
+
+.erro {
+color: #b00020;
+font-weight: 700;
+}
+
+.aviso {
+color: #b36b00;
+font-weight: 600;
+}
+
+@media (min-width: 640px) {
+.grid-2 {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+}
+}
+
+@media (max-width: 639px) {
+.container {
+padding: 12px;
+}
+
+h1 {
+font-size: 1.3rem;
+}
+
+button {
+width: 100%;
+}
+}
+
+input:focus,
+select:focus,
+button:focus {
+outline: 2px solid rgba(11, 61, 145, 0.12);
+outline-offset: 1px;
+}

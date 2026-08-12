@@ -202,11 +202,7 @@ function mostrarHistorico() {
     });
 }
 
-
-// ==============================
 // BOTÃO LIMPAR
-// ==============================
-
 document.getElementById("limpar").addEventListener("click", function () {
 
     // Limpa os campos
@@ -221,13 +217,20 @@ document.getElementById("limpar").addEventListener("click", function () {
 
 });
 
+// Botão limpar histórico
+document.getElementById("limparHistorico").addEventListener("click", function () {
 
-// ==============================
+    // Apaga o histórico do localStorage
+    localStorage.removeItem("historicoCEP");
+
+    // Apaga o histórico que aparece na tela
+    document.getElementById("historico").innerHTML = "";
+
+});
 // BOTÃO BUSCAR CEP POR ENDEREÇO
-// ==============================
-
 document
     .getElementById("buscarEndereco")
     .addEventListener("click", buscarCep);
 
+// Carrega o histórico na tela
 mostrarHistorico();
