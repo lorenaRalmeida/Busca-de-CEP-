@@ -223,20 +223,6 @@ function toggleHistorico() {
     }
 }
 
-// BOTÃO LIMPAR
-document.getElementById("limpar").addEventListener("click", function () {
-
-    // Limpa os campos
-    document.getElementById("cep").value = "";
-    document.getElementById("uf").value = "";
-    document.getElementById("cidade").value = "";
-    document.getElementById("logradouro").value = "";
-
-    // Limpa os resultados
-    document.getElementById("resultadoCep").innerHTML = "";
-    document.getElementById("resultadoEndereco").innerHTML = "";
-
-});
 
 // Botão limpar histórico
 document.getElementById("limparHistorico").addEventListener("click", function () {
