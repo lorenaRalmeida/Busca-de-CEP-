@@ -35,6 +35,10 @@ async function buscarEndereco() {
 
         resultado.innerHTML = "";
 
+        // Criar um bloco/card para o CEP
+        let card = document.createElement("div");
+        card.className = "card-resultado";
+
         let logradouro = document.createElement("p");
         logradouro.textContent = `Logradouro: ${endereco.logradouro}`;
 
@@ -47,10 +51,12 @@ async function buscarEndereco() {
         let estado = document.createElement("p");
         estado.textContent = `Estado: ${endereco.estado}`;
 
-        resultado.appendChild(logradouro);
-        resultado.appendChild(bairro);
-        resultado.appendChild(cidade);
-        resultado.appendChild(estado);
+        card.appendChild(logradouro);
+        card.appendChild(bairro);
+        card.appendChild(cidade);
+        card.appendChild(estado);
+
+        resultado.appendChild(card);
 
         // Salva no histórico
         salvarHistorico(cep);
@@ -111,6 +117,7 @@ async function buscarCep() {
         enderecos.forEach(endereco => {
 
             let card = document.createElement("div");
+            card.className = "card-resultado";
 
             let cep = document.createElement("p");
             cep.textContent = `CEP: ${endereco.cep}`;
