@@ -118,6 +118,39 @@ border: 1px solid #e8f2ff;
 margin-bottom: 8px;
 }
 
+.btn-toggle-historico {
+width: 100%;
+background: #0b3d91;
+color: #fff;
+border: none;
+padding: 12px;
+border-radius: 6px;
+cursor: pointer;
+font-weight: 600;
+font-size: 1rem;
+font-family:'Courier New', Courier, monospace;
+margin-bottom: 8px;
+text-align: left;
+transition: background 0.3s ease;
+}
+
+.btn-toggle-historico:hover {
+background: #083162;
+}
+
+.historico-container {
+max-height: 500px;
+overflow-y: auto;
+transition: max-height 0.3s ease, opacity 0.3s ease;
+opacity: 1;
+}
+
+.historico-container.oculto {
+max-height: 0;
+opacity: 0;
+overflow: hidden;
+}
+
 #historico {
 list-style: none;
 margin-top: 8px;
@@ -136,6 +169,17 @@ cursor: pointer;
 
 #historico li:hover {
 background: #f1f8ff;
+}
+
+#historico li button {
+background: none;
+border: none;
+width: 100%;
+padding: 0;
+color: #0b3d91;
+font-weight: 500;
+cursor: pointer;
+text-align: left;
 }
 
 .erro {
