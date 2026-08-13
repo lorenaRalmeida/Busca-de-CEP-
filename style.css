@@ -87,10 +87,26 @@ border-radius: 6px;
 min-height: 40px;
 margin-top: 6px;
 text-align: center;
+display: flex;
+flex-direction: column;
+gap: 8px;
 }
 
 .resultado p {
 margin: 6px 0;
+font-size: 0.95rem;
+}
+
+.card-resultado {
+padding: 12px;
+border-radius: 6px;
+background: #fff;
+border: 1px solid #cfe0ff;
+text-align: center;
+}
+
+.card-resultado p {
+margin: 8px 0;
 font-size: 0.95rem;
 }
 
