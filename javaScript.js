@@ -209,6 +209,20 @@ function mostrarHistorico() {
     });
 }
 
+// Toggle Histórico
+function toggleHistorico() {
+    const historicoContainer = document.getElementById("historicoContainer");
+    const toggleBtn = document.getElementById("toggleHistorico");
+    
+    historicoContainer.classList.toggle("oculto");
+    
+    if (historicoContainer.classList.contains("oculto")) {
+        toggleBtn.textContent = "▶ Histórico de Pesquisas";
+    } else {
+        toggleBtn.textContent = "▼ Histórico de Pesquisas";
+    }
+}
+
 // BOTÃO LIMPAR
 document.getElementById("limpar").addEventListener("click", function () {
 
@@ -234,6 +248,10 @@ document.getElementById("limparHistorico").addEventListener("click", function ()
     document.getElementById("historico").innerHTML = "";
 
 });
+
+// Botão toggle histórico
+document.getElementById("toggleHistorico").addEventListener("click", toggleHistorico);
+
 // BOTÃO BUSCAR CEP POR ENDEREÇO
 document
     .getElementById("buscarEndereco")
